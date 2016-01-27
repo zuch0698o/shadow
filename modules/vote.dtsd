@@ -13,14 +13,23 @@ MYSQLDTSD_VOTELOG_NAME="VARCHAR(25)"
 MYSQLDTSD_VOTELOG_INFO="VARCHAR(128)"
 MYSQLDTSD_VOTELOG_TIME=TIMESTAMP
 
-
 CHATHELP_VOTEALIAS="[Assign a player name to the voting database] USAGE: !VOTEALIAS voter_name"
 CHATHELP_VOTEPOINTS="[Lists the number of voting points you have] USAGE: !VOTEPOINTS"
 CHATHELP_VOTEEXCHANGE="[Exchanges voting points for rewards] !VOTEEXCHANGE list to list packages or !VOTEEXCHANGE Package_name to receive a package "
 CHATHELP_VOTECHECK="[Check Starmade Servers for new votes] !VOTEECHECK"
 
+VOTEPACKAGE_ARMOR="[ARMOR] Exchange 1 point 100 of each grey and dark grey hull"
 VOTEPACKAGE_CREDITS="[CREDITS] Exchange 1 point for 1 million credits"
-VOTEPACKAGE_SHIP="[SHIP] Exchange 1 point for a ship"
+VOTEPACKAGE_GREYADVANCED="[GREYADVANCED] Exchange 2 point for 750 of each Grey advanced armor"
+VOTEPACKAGE_JACKPOT="[JACKPOT] Exchange 1 point for 50 random blocks"
+VOTEPACKAGE_MORECREDITS="[MORECREDITS] Exchange 3 points for 10 Million Credits"
+VOTEPACKAGE_POWER="[POWER] Exchange 2 points for 5k Power Modules"
+VOTEPACKAGE_SHIELDS="[SHIELDS] Exchange 2 points for a 5k Shiled Modules"
+VOTEPACKAGE_SHIP="[SHIP] Exchange 2 points for a ship"
+VOTEPACKAGE_SHIP2="[SHIP2] Exchange 5 points for a ship"
+
+#VOTEPACKAGE_SHIP="[SHIP] Exchange 1 point for a ship"
+#VOTEPACKAGE_SHIP="[SHIP] Exchange 1 point for a ship"
 
 DTSDHELP_votecheck="\nVotecheck usage: shadow.dtsd votecheck\nParses API at Starmadservers with given key and adds information to database\n"
 DTSDHELP_setupvote="\nSetupvote usage: shadow.dtsd setupvote <on or off>\nTurns on or off the voting system\n"
@@ -293,6 +302,29 @@ chatcommand_VOTEEXCHANGE(){
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 "Please use !VOTEEXCHANGE list to list packages or !VOTEEXCHANGE Packagename to receive a package"
     fi
 }
+VOTEREWARD_ARMOR(){
+	if $(votes_deduct $1 1)
+	then
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 598 100
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 599 100
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 600 100
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 601 100
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 602 100
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 828 100
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 831 100
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 832 100
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 829 100
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 "You have converted 1 voting point into 100 of each grey and dark grey hull. Enjoy!"
+		mysql --defaults-extra-file=$CONFIGDTSD_INSTALLPATH/core/shadow.cnf -e "INSERT INTO VOTELOG (NAME, INFO) VALUES (\"$1\",\"Spent 1 point on ARMOR\");"
+	fi
+}
+VOTEREWARD_SHIP(){
+	if $(votes_deduct $1 2)
+	then
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 "You have converted 2 voting point into a ship, check around you or look in navigation for your ship!"
+		lib_trigger startership $1 $EXAMPLESTARTERSHIP
+	fi
+}
 VOTEREWARD_CREDITS(){
 	if $(votes_deduct $1 1)
 	then
@@ -301,21 +333,59 @@ VOTEREWARD_CREDITS(){
 		mysql --defaults-extra-file=$CONFIGDTSD_INSTALLPATH/core/shadow.cnf -e "INSERT INTO VOTELOG (NAME, INFO) VALUES (\"$1\",\"Spent 1 point on CREDITS\");"
 	fi
 }
-VOTEREWARD_SHIP(){
-	if $(votes_deduct $1 1)
+VOTEREWARD_GREYADVANCED(){
+	if $(votes_deduct $1 2)
 	then
-		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 "You have converted 1 voting point into a ship, check around you or look in navigation for your ship!"
-		lib_trigger startership $1 $EXAMPLESTARTERSHIP
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 263 750
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 320 750
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 401 750
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 311 750
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 402 750
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 "You have converted 1 voting point into 1 million credits. Enjoy!"
+		mysql --defaults-extra-file=$CONFIGDTSD_INSTALLPATH/core/shadow.cnf -e "INSERT INTO VOTELOG (NAME, INFO) VALUES (\"$1\",\"Spent 1 point on CREDITS\");"
 	fi
 }
-VOTEREWARD_B(){
-echo B
+VOTEREWARD_JACKPOT(){
+	if $(votes_deduct $1 1)
+	then
+		lib_screensend $CONFIGDTSD_MAINSCREEN /give_category_items $1 50 ship
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 "You have converted 1 voting point into the jackpot. Enjoy!"
+		mysql --defaults-extra-file=$CONFIGDTSD_INSTALLPATH/core/shadow.cnf -e "INSERT INTO VOTELOG (NAME, INFO) VALUES (\"$1\",\"Spent 1 point on JACPOT\");"
+	fi
 }
-VOTEREWARD_C(){
-echo C
+VOTEREWARD_MORECREDITS(){
+	if $(votes_deduct $1 3)
+	then
+		lib_screensend $CONFIGDTSD_MAINSCREEN /give_credits $1 10000000
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 "You have converted 3 voting points into 10 million credits. Enjoy!"
+		mysql --defaults-extra-file=$CONFIGDTSD_INSTALLPATH/core/shadow.cnf -e "INSERT INTO VOTELOG (NAME, INFO) VALUES (\"$1\",\"Spent 3 points on MORECREDITS\");"
+	fi
 }
-VOTEREWARD_D(){
-echo D
+VOTEREWARD_POWER(){
+	if $(votes_deduct $1 2)
+	then
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 331 5000
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 2 5000
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 "You have converted 2 voting points into 5k power modules. Enjoy!"
+		mysql --defaults-extra-file=$CONFIGDTSD_INSTALLPATH/core/shadow.cnf -e "INSERT INTO VOTELOG (NAME, INFO) VALUES (\"$1\",\"Spent 1 point on POWER\");"
+	fi
+}
+VOTEREWARD_SHIELDS(){
+	if $(votes_deduct $1 2)
+	then
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 3 10000
+		lib_screensend $CONFIGDTSD_MAINSCREEN /giveid $1 478 10000
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 "You have converted 2 voting points into 10k of each shields. Enjoy!"
+		mysql --defaults-extra-file=$CONFIGDTSD_INSTALLPATH/core/shadow.cnf -e "INSERT INTO VOTELOG (NAME, INFO) VALUES (\"$1\",\"Spent 2 points on SHIELDS\");"
+	fi
+}
+VOTEREWARD_SHIP2(){
+	if $(votes_deduct $1 5)
+	then
+		lib_trigger startership $1 $VOTESHIP2
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 "You have converted 5 voting points into a ship. Enjoy!"
+		mysql --defaults-extra-file=$CONFIGDTSD_INSTALLPATH/core/shadow.cnf -e "INSERT INTO VOTELOG (NAME, INFO) VALUES (\"$1\",\"Spent 5 points on VOTESHIP2\");"
+	fi
 }
 votes_deduct(){
 # Checks to see if there are enough voting points, deducts if so, and then returns True/False
