@@ -322,7 +322,7 @@ VOTEREWARD_SHIP(){
 	if $(votes_deduct $1 2)
 	then
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 "You have converted 2 voting point into a ship, check around you or look in navigation for your ship!"
-		lib_trigger startership $1 $EXAMPLESTARTERSHIP
+		lib_trigger startership $1 $VOTESHIP1
 	fi
 }
 VOTEREWARD_CREDITS(){
