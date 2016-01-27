@@ -52,7 +52,7 @@ core_updateshadow() {
 		mkdir $CONFIGDTSD_INSTALLPATH/core
 	fi
 	mkdir $CONFIGDTSD_INSTALLPATH/shadow/shadow_download_$current_time
-	git clone https://github.com/doomsider/shadow.git $CONFIGDTSD_INSTALLPATH/shadow/shadow_download_$current_time
+	git clone https://github.com/zuch0698o/shadow/tree/zuch0698o-patch-1.git $CONFIGDTSD_INSTALLPATH/shadow/shadow_download_$current_time
 	yes | cp -f $CONFIGDTSD_INSTALLPATH/shadow/shadow_download_$current_time/* $CONFIGDTSD_INSTALLPATH
 	yes | cp -f $CONFIGDTSD_INSTALLPATH/shadow/shadow_download_$current_time/core/* $CONFIGDTSD_INSTALLPATH/core
 	yes | cp -f $CONFIGDTSD_INSTALLPATH/shadow/shadow_download_$current_time/modules/* $CONFIGDTSD_INSTALLPATH/modules
