@@ -32,6 +32,9 @@ CHATHELP_TELEPORT="[Teleports you and the entity you are controlling, or another
 CHATHELP_WHITEADD="[Adds a player to the whitelist] USAGE: !WHITEADD <Player>"
 CHATHELP_GIVEITEM="[Gives items that are not meta or block like lasers, makerers, etc] USAGE: !GIVEITEM <heal laser superlaser marker power rocket or sniper> with optional player name at the end if you want to give it to someone else"
 CHATHELP_GIVERECIPE="[Gives a recipe by number to yourself or a player] USAGE: !GIVERECIPE NUMBER with optional playername to give to someone else"
+CHATHELP_ANNOUNCEMENTS="[Current server announcements] USAGE: !ANNOUNCEMENTS"
+CHATHELP_RULES="[Lists the rules] USAGE: !RULES"
+CHATHELP_CONTEST="[Gives details about current server contests or bounties] USAGE: !CONTEST"
 
 # Gives you blocks by their given names.  This will string match so for instance red would give you all blocks with red in their name
 # USAGE: !GIVENAME amount name_of_block
@@ -474,6 +477,56 @@ chatcommand_WHITEADD(){
 	else
 		lib_screensend $CONFIGDTSD_MAINSCREEN /whitelist_name $2
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 The name $2 has been whitelisted
+	fi
+}
+chatcommand_ANNOUCEMENTS(){
+# PM player list of current server announcements
+# USAGE: !ANNOUCEMENTS
+	if [ "$#" -ne "2" ]
+	then
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !ANNOUCEMENTS
+	else
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Join us on Teamspaek @ ts.Islandgames.ca
+#		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Test of the announcements
+#		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Test of the announcements
+#		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Test of the announcements
+	fi
+}
+chatcommand_RULES(){
+# pm's player list of rules
+# USAGE: !RULES
+	if [ "$#" -ne "1" ]
+	then
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !RULES
+	else
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 DO NOT LAG THE SERVER
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 No shipyards on planets
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 10k size limit when landing on a planet
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Faction Homebase is invincible
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Be mindful what you say in chat kids play on here as well
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 No throw away factions or characters, you can have an alternate but they must be in your faction.
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Try and dock your ships if possible, they cause lag and can be stolen while you are away
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Spawn and other select areas are protected and are safe havens
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Do not push ships out of spawn
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Admin will help in crazy situations but were here mainly to prevent cheating
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Report cheating and rule breaking to an admin right away!
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Have fun and Enjoy!
+	fi
+}
+chatcommand_CONTEST(){
+# pm player current contest info
+# USAGE: !CONTEST
+	if [ "$#" -ne "1" ]
+	then
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !CONTEST
+	else
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 We are looking for Pirate ships 15x15x30 PM admins for submission 5 million for a good ship
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 We are looking for Pirate ships 30x30x60 PM admins for submission 25 million for a good ship
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 We are looking for Pirate ships 60x60x120 PM admins for submission 150 million for a good ship
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 We are looking for Pirate ships 120x120x360 PM admins for submission 500 million for a good ship
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 We are looking for Pirate Stations 200x200x200 PM admins for submission 500 million for a good ship
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 We are looking for Pirate Stations 400x400x400 PM admins for submission 1 Billionn for a good ship
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 We are looking for Pirate Stations 600x600x600 PM admins for submission 2 Billionn for a good ship
 	fi
 }
 #######################WORKING############################
