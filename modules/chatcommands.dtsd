@@ -479,12 +479,12 @@ chatcommand_WHITEADD(){
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 The name $2 has been whitelisted
 	fi
 }
-chatcommand_ANNOUCEMENTS(){
+chatcommand_ANNOUNCEMENTS(){
 # PM player list of current server announcements
-# USAGE: !ANNOUCEMENTS
+# USAGE: !ANNOUNCEMENTS
 	if [ "$#" -ne "2" ]
 	then
-		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !ANNOUCEMENTS
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !ANNOUNCEMENTS
 	else
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Join us on Teamspaek @ ts.Islandgames.ca
 #		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Test of the announcements
@@ -499,18 +499,23 @@ chatcommand_RULES(){
 	then
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !RULES
 	else
-		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 DO NOT LAG THE SERVER
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 No strip mining planets with more then 15 player on
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 No shipyards on planets
-		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 10k size limit when landing on a planet
-		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Faction Homebase is invincible
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 5k size limit when landing on a planet
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Use the startership! its there to help
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Be mindful what you say in chat kids play on here as well
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 No throw away factions or characters, you can have an alternate but they must be in your faction.
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Try and dock your ships if possible, they cause lag and can be stolen while you are away
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Spawn and other select areas are protected and are safe havens
-		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Do not push ships out of spawn
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Do not push ships out of spawn/ try and attack at spawn
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Admin will help in crazy situations but were here mainly to prevent cheating
-		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Report cheating and rule breaking to an admin right away!
-		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Have fun and Enjoy!
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Any structure over 500m in any direction must be approved by an admin.
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Admins will not give out free stuff. Don't ask.
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Create a lag machine on purpose and you will be banned.
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Faction Homebase is invincible
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Don't advertise your server here.  thats just rude
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Report cheating and rule breaking to an admin right away
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Have fun and Enjoy
 	fi
 }
 chatcommand_CONTEST(){
