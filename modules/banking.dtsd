@@ -8,8 +8,8 @@ MYSQLDTSD_PLAYERDB_BANKCREDITS="BIGINT DEFAULT '0'"
 CHATHELP_DEPOSIT="[Deposits money into your server account from your player] USAGE: !DEPOSIT <Amount>"
 CHATHELP_WITHDRAW="[Takes money out of your server account and gives it to your player] USAGE: !WITHDRAW <Amount>"
 CHATHELP_TRANSFER="[Sends money from your bank account to another players account] USAGE: !TRANSFER <Player> <Amount>"
-CHATHELP_FDEPOSIT="[Deposits money into your Faction account from your player] USAGE: !FDEPOSIT <Amount>"
-CHATHELP_FWITHDRAW="[Takes money out of your Faction account and gives it to your player] USAGE: !FWITHDRAW <Amount>"
+#CHATHELP_FDEPOSIT="[Deposits money into your Faction account from your player] USAGE: !FDEPOSIT <Amount>"
+#CHATHELP_FWITHDRAW="[Takes money out of your Faction account and gives it to your player] USAGE: !FWITHDRAW <Amount>"
 
 chatcommand_DEPOSIT() { 
 # Deposits money into your server account from your player
@@ -151,7 +151,7 @@ chatcommand_BALANCE(){
 # #USAGE: !FDEPOSIT <Amount>
 	# if [ "$#" -ne "2" ]
 	# then
-		# lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !FACTIONDEPOSIT <Amount>
+		# lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !DEPOSIT <Amount>
 	# else
 		# if [ "$2" -gt 0 ] 2>/dev/null
 		# then
@@ -209,7 +209,7 @@ chatcommand_BALANCE(){
 # #USAGE: !FWITHDRAW <Amount>
 	# if [ "$#" -ne "2" ]
 	# then
-		# lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !FACTIONWITHDRAW <Amount>
+		# lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !FWITHDRAW <Amount>
 	# else
 		# if [ "$2" -gt 0 ] 2>/dev/null
 		# then
