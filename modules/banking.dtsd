@@ -8,6 +8,8 @@ MYSQLDTSD_PLAYERDB_BANKCREDITS="BIGINT DEFAULT '0'"
 CHATHELP_DEPOSIT="[Deposits money into your server account from your player] USAGE: !DEPOSIT <Amount>"
 CHATHELP_WITHDRAW="[Takes money out of your server account and gives it to your player] USAGE: !WITHDRAW <Amount>"
 CHATHELP_TRANSFER="[Sends money from your bank account to another players account] USAGE: !TRANSFER <Player> <Amount>"
+CHATHELP_FDEPOSIT="[Deposits money into your Faction account from your player] USAGE: !FDEPOSIT <Amount>"
+CHATHELP_FWITHDRAW="[Takes money out of your Faction account and gives it to your player] USAGE: !FWITHDRAW <Amount>"
 
 chatcommand_DEPOSIT() { 
 # Deposits money into your server account from your player
