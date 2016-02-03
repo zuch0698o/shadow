@@ -89,15 +89,28 @@ chatcommand_GARAGE(){
 	esac
 }
 chatcommand_STARTERSHIP(){
-# Gives a Player a designated starter ship
+# Gives a Player a designated starter ship. only usable once every 24 hours
 # USAGE: !STARTERSHIP 
 
 	if [ "$#" -ne "1" ]
 	then
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !STARTERSHIP
 	else
-		echo "Startership command executed"
-		lib_trigger startership $1 $EXAMPLESTARTERSHIP
+#create player adjusted time compare to playerlaststarter
+		PLAYERLASTSTARTER=$(lib_myvalueretrieve LASTSTARTER PLAYERDB $1)
+		CURRENTTIME=$(date +%s)
+		ADJUSTEDTIME=$(( $CURRENTTIME - 86400 ))
+#check if enough time has passed between commands		
+		if [ "$ADJUSTEDTIME" -gt "$PLAYERLASTSTARTER" ]
+		then
+			echo "Startership command executed"
+# example starter ship is located in defualts and the trigger and release is in trigger DB ~zko~
+			lib_trigger startership $1 $EXAMPLESTARTERSHIP
+			lib_myupdate PLAYERDB LASTSTARTER $CURRENTTIME NAME $1
+			lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 You have received one startership. There is a 24 hour cooldown before you can use it again
+		else
+			lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Please allow Startership command to cooldown. $((86400-($(date +%s)-$PLAYERLASTSTARTER))) seconds left
+		fi
 	fi
 }
 ship_boarding() {
