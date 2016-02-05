@@ -35,6 +35,7 @@ CHATHELP_GIVERECIPE="[Gives a recipe by number to yourself or a player] USAGE: !
 CHATHELP_ANNOUNCEMENTS="[Current server announcements] USAGE: !ANNOUNCEMENTS"
 CHATHELP_RULES="[Lists the rules] USAGE: !RULES"
 CHATHELP_CONTEST="[Gives details about current server contests or bounties] USAGE: !CONTEST"
+CHATHELP_PING="[Replies with pong to let you knwo if the server crashed] USAGE: !PING"
 
 # Gives you blocks by their given names.  This will string match so for instance red would give you all blocks with red in their name
 # USAGE: !GIVENAME amount name_of_block
@@ -536,6 +537,16 @@ chatcommand_CONTEST(){
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 We are looking for Pirate Stations 200x200x200 PM admins for submission 500 million for a good ship
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 We are looking for Pirate Stations 400x400x400 PM admins for submission 1 Billionn for a good ship
 		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 We are looking for Pirate Stations 600x600x600 PM admins for submission 2 Billionn for a good ship
+	fi
+}
+chatcommand_PING(){
+# Replies with pong to check if server is up
+# USAGE: !PING
+	if [ "$#" -ne "1" ]
+	then
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 Invalid parameters. Please use !PING Name
+	else
+		lib_screensend $CONFIGDTSD_MAINSCREEN /pm $1 PONG!
 	fi
 }
 #######################WORKING############################
