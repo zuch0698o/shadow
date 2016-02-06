@@ -2,6 +2,16 @@
 # Shadow .01 Based off of DTSD
 # Functions and database for Factions
 
+MYSQLDTSD_FACTIONDB_NAME="VARCHAR(25) BINARY"
+MYSQLDTSD_FACTIONDB_CREDITS="BIGINT DEFAULT '0'"
+MYSQLDTSD_FACTIONDB_ONLINE="VARCHAR(1) DEFAULT 'n'"
+MYSQLDTSD_FACTIONDB_LASTUPDATE=TIMESTAMP
+MYSQLDTSD_FACTIONDB_CURRENTSECTOR="VARCHAR(50)"
+MYSQLALTER_FACTIONDB_NAME="UNIQUE INDEX"
+
+CHATHELP_FPPURCHASE="[Purchase select items and BP's with faction points.] USAGE: !FPPURCHASE (reward)"
+
+#commands below here...
 
 #String to collect
 # String from faction list with Testers as only player faction /faction_list
